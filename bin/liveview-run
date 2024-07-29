@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 'use strict';
-const program = require('commander');
+const commander = require('commander');
 // inject shelljs to the global scope
 /* globals exec */
 require('shelljs/global');
+
+const program = new commander.Command();
 
 /**
  * no-op on unknown options handling

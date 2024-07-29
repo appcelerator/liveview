@@ -3,7 +3,7 @@
 /**
  *   Appcelerator Titanium Live Reload Development Tool
  */
-const program = require('commander'),
+const commander = require('commander'),
 	colors = require('coloring'), // eslint-disable-line no-unused-vars
 	spawn = require('win-fork'),
 	path = require('path'),
@@ -13,6 +13,8 @@ const program = require('commander'),
 	pkgConf = require('../package');
 
 require('shelljs/global');
+
+const program = new commander.Command();
 
 // usage
 program

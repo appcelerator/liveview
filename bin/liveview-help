@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 'use strict';
-const program = require('commander'),
+const commander = require('commander'),
 	colors = require('coloring'), // eslint-disable-line no-unused-vars
 	exec = require('child_process').exec;
+
+
+const program = new commander.Command();
 
 // parse argv
 program.parse(process.argv);
