@@ -1,9 +1,11 @@
-import path from 'path';
-import { ViteDevServer, createServer, normalizePath } from 'vite';
+import path from 'node:path';
+import { existsSync } from 'node:fs';
+import type { ViteDevServer } from 'vite';
+import { createServer, normalizePath } from 'vite';
 
 import { runDynamicOptimize } from './optimizer';
 import { resolvePlugins } from './plugins';
-import { Platform, ProjectType } from './types';
+import type { Platform, ProjectType } from './types';
 import { CLIENT_DIR, CLIENT_ENTRY, ENV_ENTRY, FS_PREFIX } from './constants.js';
 
 interface ProjectOptions {
@@ -39,8 +41,9 @@ export async function startServer({
 		OS_ANDROID: JSON.stringify(platform === 'android'),
 		OS_IOS: JSON.stringify(platform === 'ios')
 	};
+	const configFile = path.join(projectDir, 'vite.config.js');
 	const viteSever = await createServer({
-		configFile: path.join(projectDir, 'vite.config.js'),
+		configFile: existsSync(configFile) ? configFile : undefined,
 		clearScreen: false,
 		root,
 		build: {
